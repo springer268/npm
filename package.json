@@ -2,7 +2,7 @@
   "name": "benchmarks-grpc",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/benchmarks.js",
   "type": "module",
   "types": "dist/benchmarks.d.ts",
   "scripts": {
