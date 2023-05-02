@@ -223,6 +223,15 @@ exports.BenchmarksService = {
         responseSerialize: (value) => Buffer.from(exports.VmList.encode(value).finish()),
         responseDeserialize: (value) => exports.VmList.decode(value),
     },
+    getVMs2: {
+        path: "/benchmarks.Benchmarks/getVMs2",
+        requestStream: false,
+        responseStream: false,
+        requestSerialize: (value) => Buffer.from(exports.ServerInfo.encode(value).finish()),
+        requestDeserialize: (value) => exports.ServerInfo.decode(value),
+        responseSerialize: (value) => Buffer.from(exports.VmList.encode(value).finish()),
+        responseDeserialize: (value) => exports.VmList.decode(value),
+    },
 };
 exports.BenchmarksClient = (0, grpc_js_1.makeGenericClientConstructor)(exports.BenchmarksService, "benchmarks.Benchmarks");
 function isSet(value) {
