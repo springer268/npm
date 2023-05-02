@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { CallOptions, ChannelCredentials, Client, ClientOptions, ClientReadableStream, ClientUnaryCall, handleServerStreamingCall, handleUnaryCall, Metadata, ServiceError, UntypedServiceImplementation } from "@grpc/grpc-js";
 import _m0 from "protobufjs/minimal";
 export interface ServerInfo {
@@ -97,21 +96,11 @@ export declare const BenchmarksService: {
         readonly responseSerialize: (value: VmList) => Buffer;
         readonly responseDeserialize: (value: Buffer) => VmList;
     };
-    readonly getVMs2: {
-        readonly path: "/benchmarks.Benchmarks/getVMs2";
-        readonly requestStream: false;
-        readonly responseStream: false;
-        readonly requestSerialize: (value: ServerInfo) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => ServerInfo;
-        readonly responseSerialize: (value: VmList) => Buffer;
-        readonly responseDeserialize: (value: Buffer) => VmList;
-    };
 };
 export interface BenchmarksServer extends UntypedServiceImplementation {
     runKBench: handleServerStreamingCall<voidNoParam, BenchmarkMessage>;
     sayHello: handleUnaryCall<voidNoParam, BenchmarkMessage>;
     getVMs: handleUnaryCall<ServerInfo, VmList>;
-    getVMs2: handleUnaryCall<ServerInfo, VmList>;
 }
 export interface BenchmarksClient extends Client {
     runKBench(request: voidNoParam, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
@@ -122,9 +111,6 @@ export interface BenchmarksClient extends Client {
     getVMs(request: ServerInfo, callback: (error: ServiceError | null, response: VmList) => void): ClientUnaryCall;
     getVMs(request: ServerInfo, metadata: Metadata, callback: (error: ServiceError | null, response: VmList) => void): ClientUnaryCall;
     getVMs(request: ServerInfo, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: VmList) => void): ClientUnaryCall;
-    getVMs2(request: ServerInfo, callback: (error: ServiceError | null, response: VmList) => void): ClientUnaryCall;
-    getVMs2(request: ServerInfo, metadata: Metadata, callback: (error: ServiceError | null, response: VmList) => void): ClientUnaryCall;
-    getVMs2(request: ServerInfo, metadata: Metadata, options: Partial<CallOptions>, callback: (error: ServiceError | null, response: VmList) => void): ClientUnaryCall;
 }
 export declare const BenchmarksClient: {
     new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): BenchmarksClient;
