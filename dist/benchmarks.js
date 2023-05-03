@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BenchmarksClient = exports.BenchmarksService = exports.voidNoParam = exports.BenchmarkMessage = exports.VmList = exports.ServerInfo = void 0;
+exports.WCPClient = exports.WCPService = exports.BenchmarksClient = exports.BenchmarksService = exports.voidNoParam = exports.BenchmarkMessage = exports.VmList = exports.ServerInfo = void 0;
 const grpc_js_1 = require("@grpc/grpc-js");
 const minimal_1 = __importDefault(require("protobufjs/minimal"));
 function createBaseServerInfo() {
@@ -234,6 +234,18 @@ exports.BenchmarksService = {
     },
 };
 exports.BenchmarksClient = (0, grpc_js_1.makeGenericClientConstructor)(exports.BenchmarksService, "benchmarks.Benchmarks");
+exports.WCPService = {
+    deployVc: {
+        path: "/benchmarks.WCP/deployVC",
+        requestStream: false,
+        responseStream: true,
+        requestSerialize: (value) => Buffer.from(exports.voidNoParam.encode(value).finish()),
+        requestDeserialize: (value) => exports.voidNoParam.decode(value),
+        responseSerialize: (value) => Buffer.from(exports.BenchmarkMessage.encode(value).finish()),
+        responseDeserialize: (value) => exports.BenchmarkMessage.decode(value),
+    },
+};
+exports.WCPClient = (0, grpc_js_1.makeGenericClientConstructor)(exports.WCPService, "benchmarks.WCP");
 function isSet(value) {
     return value !== null && value !== undefined;
 }

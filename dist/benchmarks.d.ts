@@ -129,3 +129,26 @@ export declare const BenchmarksClient: {
     new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): BenchmarksClient;
     service: typeof BenchmarksService;
 };
+export type WCPService = typeof WCPService;
+export declare const WCPService: {
+    readonly deployVc: {
+        readonly path: "/benchmarks.WCP/deployVC";
+        readonly requestStream: false;
+        readonly responseStream: true;
+        readonly requestSerialize: (value: voidNoParam) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => voidNoParam;
+        readonly responseSerialize: (value: BenchmarkMessage) => Buffer;
+        readonly responseDeserialize: (value: Buffer) => BenchmarkMessage;
+    };
+};
+export interface WCPServer extends UntypedServiceImplementation {
+    deployVc: handleServerStreamingCall<voidNoParam, BenchmarkMessage>;
+}
+export interface WCPClient extends Client {
+    deployVc(request: voidNoParam, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
+    deployVc(request: voidNoParam, metadata?: Metadata, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
+}
+export declare const WCPClient: {
+    new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): WCPClient;
+    service: typeof WCPService;
+};
