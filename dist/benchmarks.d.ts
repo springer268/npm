@@ -1,5 +1,22 @@
 import { CallOptions, ChannelCredentials, Client, ClientOptions, ClientReadableStream, ClientUnaryCall, handleServerStreamingCall, handleUnaryCall, Metadata, ServiceError, UntypedServiceImplementation } from "@grpc/grpc-js";
 import _m0 from "protobufjs/minimal";
+export interface HostInfo {
+    fqdn: string;
+    password: string;
+    datastore: string;
+}
+export interface DeployVCInfo {
+    host?: HostInfo;
+    prefix: string;
+    build?: string | undefined;
+    password?: string | undefined;
+    vmName?: string | undefined;
+    ip: string;
+    user?: string | undefined;
+    featureStates: string[];
+    size?: string | undefined;
+    gateway: string;
+}
 export interface ServerInfo {
     server: string;
 }
@@ -11,6 +28,106 @@ export interface BenchmarkMessage {
 }
 export interface voidNoParam {
 }
+export declare const HostInfo: {
+    encode(message: HostInfo, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): HostInfo;
+    fromJSON(object: any): HostInfo;
+    toJSON(message: HostInfo): unknown;
+    create<I extends {
+        fqdn?: string | undefined;
+        password?: string | undefined;
+        datastore?: string | undefined;
+    } & {
+        fqdn?: string | undefined;
+        password?: string | undefined;
+        datastore?: string | undefined;
+    } & { [K in Exclude<keyof I, keyof HostInfo>]: never; }>(base?: I | undefined): HostInfo;
+    fromPartial<I_1 extends {
+        fqdn?: string | undefined;
+        password?: string | undefined;
+        datastore?: string | undefined;
+    } & {
+        fqdn?: string | undefined;
+        password?: string | undefined;
+        datastore?: string | undefined;
+    } & { [K_1 in Exclude<keyof I_1, keyof HostInfo>]: never; }>(object: I_1): HostInfo;
+};
+export declare const DeployVCInfo: {
+    encode(message: DeployVCInfo, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): DeployVCInfo;
+    fromJSON(object: any): DeployVCInfo;
+    toJSON(message: DeployVCInfo): unknown;
+    create<I extends {
+        host?: {
+            fqdn?: string | undefined;
+            password?: string | undefined;
+            datastore?: string | undefined;
+        } | undefined;
+        prefix?: string | undefined;
+        build?: string | undefined;
+        password?: string | undefined;
+        vmName?: string | undefined;
+        ip?: string | undefined;
+        user?: string | undefined;
+        featureStates?: string[] | undefined;
+        size?: string | undefined;
+        gateway?: string | undefined;
+    } & {
+        host?: ({
+            fqdn?: string | undefined;
+            password?: string | undefined;
+            datastore?: string | undefined;
+        } & {
+            fqdn?: string | undefined;
+            password?: string | undefined;
+            datastore?: string | undefined;
+        } & { [K in Exclude<keyof I["host"], keyof HostInfo>]: never; }) | undefined;
+        prefix?: string | undefined;
+        build?: string | undefined;
+        password?: string | undefined;
+        vmName?: string | undefined;
+        ip?: string | undefined;
+        user?: string | undefined;
+        featureStates?: (string[] & string[] & { [K_1 in Exclude<keyof I["featureStates"], keyof string[]>]: never; }) | undefined;
+        size?: string | undefined;
+        gateway?: string | undefined;
+    } & { [K_2 in Exclude<keyof I, keyof DeployVCInfo>]: never; }>(base?: I | undefined): DeployVCInfo;
+    fromPartial<I_1 extends {
+        host?: {
+            fqdn?: string | undefined;
+            password?: string | undefined;
+            datastore?: string | undefined;
+        } | undefined;
+        prefix?: string | undefined;
+        build?: string | undefined;
+        password?: string | undefined;
+        vmName?: string | undefined;
+        ip?: string | undefined;
+        user?: string | undefined;
+        featureStates?: string[] | undefined;
+        size?: string | undefined;
+        gateway?: string | undefined;
+    } & {
+        host?: ({
+            fqdn?: string | undefined;
+            password?: string | undefined;
+            datastore?: string | undefined;
+        } & {
+            fqdn?: string | undefined;
+            password?: string | undefined;
+            datastore?: string | undefined;
+        } & { [K_3 in Exclude<keyof I_1["host"], keyof HostInfo>]: never; }) | undefined;
+        prefix?: string | undefined;
+        build?: string | undefined;
+        password?: string | undefined;
+        vmName?: string | undefined;
+        ip?: string | undefined;
+        user?: string | undefined;
+        featureStates?: (string[] & string[] & { [K_4 in Exclude<keyof I_1["featureStates"], keyof string[]>]: never; }) | undefined;
+        size?: string | undefined;
+        gateway?: string | undefined;
+    } & { [K_5 in Exclude<keyof I_1, keyof DeployVCInfo>]: never; }>(object: I_1): DeployVCInfo;
+};
 export declare const ServerInfo: {
     encode(message: ServerInfo, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): ServerInfo;
@@ -135,18 +252,18 @@ export declare const WCPService: {
         readonly path: "/benchmarks.WCP/deployVC";
         readonly requestStream: false;
         readonly responseStream: true;
-        readonly requestSerialize: (value: voidNoParam) => Buffer;
-        readonly requestDeserialize: (value: Buffer) => voidNoParam;
+        readonly requestSerialize: (value: DeployVCInfo) => Buffer;
+        readonly requestDeserialize: (value: Buffer) => DeployVCInfo;
         readonly responseSerialize: (value: BenchmarkMessage) => Buffer;
         readonly responseDeserialize: (value: Buffer) => BenchmarkMessage;
     };
 };
 export interface WCPServer extends UntypedServiceImplementation {
-    deployVc: handleServerStreamingCall<voidNoParam, BenchmarkMessage>;
+    deployVc: handleServerStreamingCall<DeployVCInfo, BenchmarkMessage>;
 }
 export interface WCPClient extends Client {
-    deployVc(request: voidNoParam, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
-    deployVc(request: voidNoParam, metadata?: Metadata, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
+    deployVc(request: DeployVCInfo, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
+    deployVc(request: DeployVCInfo, metadata?: Metadata, options?: Partial<CallOptions>): ClientReadableStream<BenchmarkMessage>;
 }
 export declare const WCPClient: {
     new (address: string, credentials: ChannelCredentials, options?: Partial<ClientOptions>): WCPClient;
